@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#080808">
+    <title>Serely's Web Page</title>
+    <style>
+        :root {
+            --ink: #080808;
+            --paper: #f7f7f7;
+            --banner: url("https://media1.tenor.com/m/i1Yp-v_vDAcAAAAC/sua-alien-stage.gif");
+            --stripe: repeating-linear-gradient(45deg, #080808 0 34px, #858585 34px 68px);
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            color: var(--ink);
+            background: var(--stripe);
+            background-attachment: fixed;
+            font-family: Georgia, "Times New Roman", serif;
+            cursor: url("https://www.rw-designer.com/cursor-view/23324.png"), auto;
+        }
+
+        a {
+            color: #142c9b;
+        }
+
+        a:hover {
+            color: #668eae;
+        }
+
+        /* ---------- Intro overlay ---------- */
+        .intro {
+            position: fixed;
+            inset: 0;
+            z-index: 10000;
+            pointer-events: none;
+            background: #000 url("https://media1.tenor.com/m/g-UsUIJkomwAAAAC/sua-alnst.gif") center / cover no-repeat;
+            animation: introFade 3s ease forwards;
+        }
+
+        @keyframes introFade {
+
+            0%,
+            72% {
+                opacity: 1;
+            }
+
+            100% {
+                opacity: 0;
+                visibility: hidden;
+            }
+        }
+
+        /* ---------- Header ---------- */
+        .site-header {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: #fff;
+            border-bottom: 3px solid #080808;
+            box-shadow: 0 2px 0 #aaa;
+        }
+
+        .topbar {
+            display: flex;
+            align-items: center;
+            min-height: 76px;
+            padding: 7px 14px;
+        }
+
+        .logo-box {
+            width: 240px;
+            height: 62px;
+            border: 4px ridge #777;
+            display: grid;
+            place-items: center;
+            background: linear-gradient(#fff, #ddd);
+            overflow: hidden;
+        }
+
+        .logo-box img {
+            max-width: 190px;
+            max-height: 48px;
+            object-fit: contain;
+            filter: drop-shadow(1px 1px #000);
+        }
+
+        /* ---------- Layout ---------- */
+        .page {
+            width: min(1500px, 100%);
+            margin: 0 auto;
+            padding: 16px;
+            display: grid;
+            grid-template-columns: minmax(320px, 1.2fr) minmax(420px, 2.4fr) minmax(190px, 0.72fr);
+            gap: 20px;
+            align-items: start;
+        }
+
+        .panel {
+            background: var(--paper);
+            border: 2px solid #111;
+            box-shadow: inset 0 0 0 2px #bbb, 0 1px 3px #000;
+        }
+
+        .panel-title {
+            margin: 0;
+            padding: 5px 10px;
+            color: #fff;
+            font-size: 17px;
+            font-weight: normal;
+            letter-spacing: 1px;
+            background: linear-gradient(#777, #111 55%, #000);
+            border-bottom: 2px solid #111;
+            box-shadow: inset 0 2px 2px #ddd;
+            text-shadow: 1px 1px #000;
+        }
+
+        .panel-content {
+            padding: 12px;
+        }
+
+        /* ---------- Left column ---------- */
+        .profile-card {
+            margin-bottom: 14px;
+        }
+
+        .profile-intro {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+            align-items: center;
+            min-height: 190px;
+        }
+
+        .avatar {
+            width: 100%;
+            max-width: 145px;
+            aspect-ratio: 1;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 2px dotted #888;
+            margin: auto;
+        }
+
+        .profile-copy {
+            text-align: right;
+            line-height: 1.55;
+        }
+
+        .online {
+            font-weight: bold;
+        }
+
+        .divider {
+            border: 0;
+            border-top: 2px dashed #333;
+            margin: 12px 0 8px;
+        }
+
+        .mood {
+            line-height: 1.65;
+        }
+
+        .mood strong {
+            letter-spacing: 1px;
+        }
+
+        .left-art {
+            margin-top: 14px;
+            padding: 8px;
+            text-align: center;
+        }
+
+        .left-art img {
+            width: 100%;
+            max-height: 190px;
+            object-fit: cover;
+        }
+
+        .left-art small {
+            display: block;
+            margin-top: 5px;
+        }
+
+        /* Dashboard "Currently" */
+        .status-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            padding: 12px 15px;
+            background: #fff;
+        }
+
+        .status-item {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 5px;
+            min-width: 0;
+            min-height: 65px;
+            padding: 8px;
+            border-bottom: 1px dashed #aaa;
+        }
+
+        .status-label {
+            font-size: 11px;
+            letter-spacing: 1px;
+            text-decoration: underline;
+            color: #555;
+        }
+
+        .status-item strong {
+            font-size: 14px;
+            font-style: italic;
+        }
+
+        .status-shortcuts {
+            padding: 12px 15px;
+            border-top: 1px dashed #555;
+            background: #fff;
+        }
+
+        .status-shortcuts h3 {
+            margin: 0 0 12px;
+            font-size: 12px;
+            font-weight: normal;
+            letter-spacing: 1px;
+            text-decoration: underline;
+        }
+
+        .shortcut-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 12px;
+        }
+
+        .shortcut-grid a {
+            color: #222;
+            font-size: 12px;
+            font-weight: bold;
+            font-style: italic;
+            text-decoration: none;
+        }
+
+        .shortcut-grid a:hover {
+            color: #777;
+            text-decoration: underline;
+        }
+
+        /* ---------- Center column ---------- */
+        .hero {
+            position: relative;
+            height: 250px;
+            margin-bottom: 14px;
+            border: 2px solid #111;
+            background: #111 var(--banner) center / cover no-repeat;
+            overflow: hidden;
+        }
+
+        .hero::after {
+            content: "⋮ 𝓢𝓮𝓻𝓮𝓵𝔂'𝓼 𝓦𝓮𝓫 𝓟𝓪𝓰𝓮  ⋆";
+            position: absolute;
+            left: 18px;
+            top: 10px;
+            color: #fff;
+            font-size: clamp(22px, 3vw, 38px);
+            text-shadow: 2px 2px 3px #000, -1px -1px #000;
+        }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+        }
+
+        .info-box {
+            min-height: 175px;
+            border: 2px solid #111;
+            background: #fff;
+            box-shadow: inset 0 0 0 3px #ddd;
+        }
+
+        .info-box h3 {
+            margin: 0;
+            padding: 5px 8px;
+            font-size: 14px;
+            font-weight: normal;
+            letter-spacing: 1px;
+            text-decoration: underline;
+            background: linear-gradient(#eee, #fff);
+            border-bottom: 1px solid #999;
+        }
+
+        .info-box p {
+            margin: 10px 12px;
+            text-align: right;
+            line-height: 1.45;
+        }
+
+        .info-box .script {
+            font-weight: bold;
+            font-style: italic;
+            font-size: 16px;
+        }
+
+        .wide-box {
+            grid-column: 1 / -1;
+            min-height: 120px;
+        }
+
+        .photo-gallery {
+            display: flex;
+            gap: 12px;
+            padding: 12px;
+            overflow-x: auto;
+            align-items: center;
+        }
+
+        .photo-gallery img {
+            width: 130px;
+            height: 130px;
+            flex: 0 0 130px;
+            object-fit: cover;
+            border: 1px solid #777;
+            padding: 3px;
+            background: #fff;
+            transition: transform 0.2s ease;
+        }
+
+        .photo-gallery img:hover {
+            transform: scale(1.05);
+        }
+
+        /* ---------- Right column ---------- */
+        .social-list {
+            display: grid;
+            gap: 8px;
+        }
+
+        .social-item {
+            border: 2px solid #111;
+            background: linear-gradient(#eee, #fff);
+            text-align: center;
+            padding: 7px 5px;
+        }
+
+        .social-item a {
+            color: #111;
+            text-decoration: none;
+        }
+
+        .social-item a:hover {
+            text-decoration: underline;
+        }
+
+        .social-name {
+            display: block;
+            font-size: 13px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            border-bottom: 1px solid #999;
+            padding-bottom: 5px;
+            margin-bottom: 5px;
+        }
+
+        footer {
+            margin: 0 16px 20px;
+            padding: 10px;
+            background: #fff;
+            border: 2px solid #111;
+            text-align: center;
+            font-size: 12px;
+        }
+
+        /* ---------- Floating GIF and falling decorations ---------- */
+        .corner-gif {
+            position: fixed;
+            right: 22px;
+            bottom: 0;
+            width: 125px;
+            max-height: 170px;
+            object-fit: contain;
+            z-index: 900;
+            pointer-events: none;
+            filter: drop-shadow(1px 2px 2px #555);
+        }
+
+        .snowflakes {
+            position: fixed;
+            inset: 0;
+            overflow: hidden;
+            pointer-events: none;
+            z-index: 800;
+        }
+
+        .snowflake {
+            position: absolute;
+            top: -12%;
+            width: 23px;
+            height: 23px;
+            object-fit: contain;
+            animation: fall 12s linear infinite, sway 3s ease-in-out infinite;
+        }
+
+        .snowflake:nth-child(1) {
+            left: 7%;
+            animation-delay: 0s, .2s;
+        }
+
+        .snowflake:nth-child(2) {
+            left: 19%;
+            animation-delay: 3s, 1s;
+        }
+
+        .snowflake:nth-child(3) {
+            left: 31%;
+            animation-delay: 7s, .5s;
+        }
+
+        .snowflake:nth-child(4) {
+            left: 44%;
+            animation-delay: 1s, 1.5s;
+        }
+
+        .snowflake:nth-child(5) {
+            left: 57%;
+            animation-delay: 5s, .3s;
+        }
+
+        .snowflake:nth-child(6) {
+            left: 69%;
+            animation-delay: 8s, 1.2s;
+        }
+
+        .snowflake:nth-child(7) {
+            left: 81%;
+            animation-delay: 2s, .7s;
+        }
+
+        .snowflake:nth-child(8) {
+            left: 93%;
+            animation-delay: 6s, 1.7s;
+        }
+
+        @keyframes fall {
+            to {
+                transform: translateY(115vh);
+            }
+        }
+
+        @keyframes sway {
+
+            0%,
+            100% {
+                margin-left: 0;
+            }
+
+            50% {
+                margin-left: 35px;
+            }
+        }
+
+        /* ---------- Retro scrollbar ---------- */
+        ::-webkit-scrollbar {
+            width: 15px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #ddd;
+            border-left: 1px solid #777;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #bbb;
+            border: 2px outset #eee;
+            box-shadow: inset -1px -1px #555;
+        }
+
+        /* ---------- Responsive ---------- */
+        @media (max-width: 900px) {
+            .page {
+                grid-template-columns: minmax(190px, .8fr) minmax(0, 2fr);
+            }
+
+            .right-rail {
+                grid-column: 1 / -1;
+            }
+        }
+
+        @media (max-width: 620px) {
+            .logo-box {
+                width: 95px;
+                height: 52px;
+            }
+
+            .logo-box img {
+                max-width: 82px;
+            }
+
+            .page {
+                display: flex;
+                flex-direction: column;
+                padding: 10px;
+            }
+
+            .center-column {
+                order: -1;
+            }
+
+            .hero {
+                height: 190px;
+            }
+
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .wide-box {
+                grid-column: auto;
+            }
+
+            .corner-gif {
+                width: 85px;
+                right: 5px;
+            }
+
+            footer {
+                margin: 0 10px 15px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+
+            *,
+            *::before,
+            *::after {
+                animation-duration: .01ms !important;
+                animation-iteration-count: 1 !important;
+                scroll-behavior: auto !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="intro" aria-hidden="true"></div>
+
+    <header class="site-header">
+        <div class="topbar">
+            <div class="logo-box">
+                <img src="https://static.wikia.nocookie.net/alien-stage/images/e/e6/Site-logo.png/revision/latest?cb=20221224165134"
+                    alt="Alien Stage logo">
+            </div>
+        </div>
+    </header>
+
+    <main class="page" id="top">
+
+        <!-- Columna izquierda -->
+        <aside class="left-rail">
+            <section class="panel profile-card">
+                <h2 class="panel-title">𓄲 𓏼 sᴇʀᴇʟʏ 𓈒 !</h2>
+                <div class="panel-content">
+                    <div class="profile-intro">
+                        <img class="avatar"
+                            src="https://i.pinimg.com/736x/a2/44/4f/a2444f01a1befc1d4437d7cfe91af13a.jpg"
+                            alt="Profile avatar">
+                        <div class="profile-copy">
+                            <div>"Página en progreso... (╥﹏╥)"</div>
+                            <div>she♡ her !!</div>
+                            <div class="online">OFFLINE!</div>
+                        </div>
+                    </div>
+                    <hr class="divider">
+                    <div class="mood">
+                        <strong>MOOD:</strong> "Instead of Here" - Mitski
+                    </div>
+                </div>
+            </section>
+
+            <section class="panel" id="dashboard">
+                <h2 class="panel-title">現在 ⋆ CURRENTLY</h2>
+                <div class="status-grid">
+                    <div class="status-item">
+                        <span class="status-label">♫ LISTENING</span>
+                        <strong>Olivia Rodrigo</strong>
+                    </div>
+                    <div class="status-item">
+                        <span class="status-label">▣ WATCHING</span>
+                        <strong>Shameless</strong>
+                    </div>
+                    <div class="status-item">
+                        <span class="status-label">✎ SCHOOL</span>
+                        <strong>ULSA Chihuahua</strong>
+                    </div>
+                    <div class="status-item">
+                        <span class="status-label">♡ CAREER</span>
+                        <strong>Ingenieria en Sistemas</strong>
+                    </div>
+                </div>
+
+                <div class="status-shortcuts">
+                    <h3>QUICK ACCESS</h3>
+                    <div class="shortcut-grid">
+                        <a href="#about">✧ ABOUT ME ↗</a>
+                        <a href="#projects">✧ MY PROJECTS ↗</a>
+                        <a href="#gallery">✧ GALLERY ↗</a>
+                        <a href="#music">✧ PLAYLISTS ↗</a>
+                    </div>
+                </div>
+            </section>
+
+            <section class="panel left-art">
+                <img src="https://i.pinimg.com/736x/17/16/ed/1716ed8b7c326d778f7dca6731052a8d.jpg" alt="Random Image 1">
+                <small><a href="#about"> スア ⋆ Sua! </a></small>
+            </section>
+        </aside>
+
+        <!-- Columna central -->
+        <section class="center-column">
+            <div class="hero" role="img" aria-label="Alien Stage animated banner"></div>
+
+            <div class="panel">
+                <h2 class="panel-title">好き ⋆ ABOUT ME</h2>
+                <div class="panel-content content-grid">
+
+                    <article class="info-box" id="about">
+                        <h3>GENERAL</h3>
+                        <p><span class="script">──── Holaa, esta es solo una pagina sobre mi .ᐟ</span><br>
+                            ── Ya habia trabajado con codigo HTML y CSS antes, asi que fue relativamente rapido hacer
+                            esto, aun asi aprendi muchas cosas nuevas del lenguaje!
+                        </p>
+                    </article>
+
+                    <article class="info-box" id="music">
+                        <h3>MUSIC</h3>
+                        <p><span class="script">──── Escucho de todo ! ⋆｡°✩ </span></p>
+                        <p> Mis Artistas / Musicales Favs: Will Wood, Bo Burnham, Radiohead,
+                            Jeff Buckley, The Strokes, The Smiths, Mitski, Arctic Monkeys, Jeremy Jordan,
+                            Laufey, Sabrina Carpenter, Olivia Rodrigo, Conan Gray, Chappell Roan, Ricky Montgomery,
+                            Eminem, Korn, Slipknot, Nirvana, System Of A Down, Avenged Sevenfold, The Beatles,
+                            Frank Sinatra, Queen, Bread, ABBA, Billy Joel, José José, Enjambre, Miranda,
+                            Alejandro Sanz, Epic: The Musical, Legally Blonde: The Musical, Hamilton,
+                            Heathers The Musical, The Great Gatsby Musical, etc.</p>
+                    </article>
+
+                    <article class="info-box" id="favorites">
+                        <h3>MOVIES / GAMES</h3>
+                        <p><span class="script">──── No conozco muchas pelis srry (╥﹏╥) ⋆｡°</span><br>
+                            Good Will Hunting, Dead Poets Society, The Perks of Being a Wallflower, Beautiful Boy,
+                            Project Hail Mary.</p>
+                        <p><span class="script">──── Tampoco muchos juegos pero meh ⋆｡°</span><br>
+                            Saihate Station, Reverse 1999, Omori, Project Sekai, Identity V, Roblox, Minecraft,
+                            Genshin Impact.</p>
+                    </article>
+
+                    <article class="info-box" id="interests">
+                        <h3>TELEVISION / ANIME</h3>
+                        <p><span class="script">──── ME ENCANTA VER SERIES! ⋆｡°</span><br>
+                            Algunas de mis favs: Sherlock BBC, Hannibal, Good Omens, The Office, Inside Job,
+                            Hazbin Hotel (escuchamos no juzgamos, ok?), Helluva Boss, Chainsaw-man, Blue
+                            Lock, Mob Psycho, Saiki K, Attack on Titan, Apothecary Diaries, Death Note,
+                            Jujutsu Kaisen, Wonder Egg Priority, etc.
+                        </p>
+                    </article>
+
+                    <article class="info-box wide-box" id="gallery">
+                        <h3>MOODBOARD</h3>
+                        <div class="photo-gallery">
+                            <img src="https://i.pinimg.com/736x/94/98/40/9498403bbad0b5b1a152f8d9fc63c88a.jpg"
+                                alt="Gallery img 1">
+                            <img src="https://i.pinimg.com/736x/30/d2/db/30d2dbf8502d47edb3ee7d70fe7e5994.jpg"
+                                alt="Gallery img 2">
+                            <img src="https://i.pinimg.com/736x/9e/fb/83/9efb8394f550d4aa199313e32748cd43.jpg"
+                                alt="Gallery img 3">
+                            <img src="https://i.pinimg.com/736x/25/6d/e6/256de6077d13ca307c4dab444552d7ef.jpg"
+                                alt="Gallery img 4">
+                            <img src="https://i.pinimg.com/736x/3e/20/52/3e2052de80359b9aba57174d42e72f19.jpg"
+                                alt="Gallery img 5">
+                        </div>
+                    </article>
+
+                    <article class="info-box wide-box" id="projects">
+                        <h3>WHAT I WANT TO LEARN</h3>
+                        <p><span class="script">──── Lo que quiero aprender ⋆｡°</span><br>
+                            Desarrollo de software: aprender a crear aplicaciones y programas funcionales.<br>
+                            Inteligencia artificial: comprender cómo funcionan los modelos de IA y sus aplicaciones.<br>
+                            Desarrollo web: dominar HTML, CSS, JavaScript y la creación de sitios interactivos.<br>
+                            Bases de datos: aprender a organizar, almacenar y administrar información.<br>
+                            Linux y redes: comprender mejor los sistemas operativos y la infraestructura informática.
+                        </p>
+                    </article>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- Columna derecha -->
+        <aside class="right-rail" id="socials">
+            <section class="panel">
+                <h2 class="panel-title"> ⋆ CONTACT</h2>
+                <div class="panel-content social-list" id="links">
+                    <div class="social-item">
+                        <a href="https://github.com/serelygarduno" target="_blank" rel="noopener">
+                            <span class="social-name">★ GitHub</span>@serelygarduno
+                        </a>
+                    </div>
+                    <div class="social-item">
+                        <a href="https://www.tiktok.com/@swmplx?_r=1&_t=ZS-9BJpnSMKIJo" target="_blank" rel="noopener">
+                            <span class="social-name">♪ TikTok</span>@swmplx
+                        </a>
+                    </div>
+                    <div class="social-item">
+                        <a href="https://www.instagram.com/serely.s?exln=djJqZmYxZ29xeWs1&utm_source=qr" target="_blank"
+                            rel="noopener">
+                            <span class="social-name">☆ Instagram</span>@serely.s
+                        </a>
+                    </div>
+                    <div class="social-item">
+                        <a href="https://open.spotify.com/user/fnoumufxhtw4mjvhc93xpi9qb?si=Z1OHYTaxRKePe9JH5GrlBA&utm_source=copy-link"
+                            target="_blank" rel="noopener">
+                            <span class="social-name">𝄞 Spotify</span>My playlists
+                        </a>
+                    </div>
+                </div>
+            </section>
+        </aside>
+    </main>
+
+    <footer>
+        Hecho con HTML & CSS · Eso es todo! · <a href="#top">Inicio ↑</a>
+    </footer>
+
+    <img class="corner-gif" src="https://media.tenor.com/aOeRIcEBSJEAAAAi/alien-stage-alnst.gif" alt=""
+        aria-hidden="true">
+
+    <div class="snowflakes" aria-hidden="true">
+        <img class="snowflake" src="https://i.imgur.com/tJWQdyO.gif" alt="">
+        <img class="snowflake" src="https://i.imgur.com/tJWQdyO.gif" alt="">
+        <img class="snowflake" src="https://i.imgur.com/tJWQdyO.gif" alt="">
+        <img class="snowflake" src="https://i.imgur.com/tJWQdyO.gif" alt="">
+        <img class="snowflake" src="https://i.imgur.com/tJWQdyO.gif" alt="">
+        <img class="snowflake" src="https://i.imgur.com/tJWQdyO.gif" alt="">
+        <img class="snowflake" src="https://i.imgur.com/tJWQdyO.gif" alt="">
+        <img class="snowflake" src="https://i.imgur.com/tJWQdyO.gif" alt="">
+    </div>
+
+</body>
+
+</html>
